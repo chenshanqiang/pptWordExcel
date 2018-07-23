@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Office文档网页预览的实现</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            function xlPrint() {
+                var xlApp; //存放Excel对象
+                var xlBook; //存放Excel工件簿文件
+                var xlSheet; //存放Excel活动工作表
+                try {
+                    xlApp = new ActiveXObject("Excel.Application");
+                } catch(e) {
+                    alert("请启用ActiveX控件设置！");
+                    return;
+                }
+                var xlBook = xlApp.Workbooks.Add;
+                var xlSheet = xlBook.Worksheets(1);
+                xlSheet.Cells(1, 1).Value = "内容"; //这里为新建的excel增加数据        
+                xlBook.Worksheets(1).Activate;
+                xlApp.Visible = true;
+                xlSheet.PrintPreview; // 打印预览
+                xlBook.Close(false); //如果为true,代表关闭的时候需要保存,false代表不需要关闭
+                xlApp.Quit();
+                xlApp = null;
+            }
+        </script>
+    </body>
+</html>
